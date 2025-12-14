@@ -1,0 +1,6 @@
+@qtip_backend_services_HostAddress = http://localhost:5035
+
+GET {{qtip_backend_services_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

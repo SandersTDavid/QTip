@@ -1,0 +1,20 @@
+﻿# JetBrains
+.idea/
+
+# .NET
+**/bin/
+**/obj/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Node
+**/node_modules/
+**/dist/
+**/build/
+**/.vite/
+**/.parcel-cache/
+
+# Logs
+*.log
