@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{2FC82089-FEE0-49A2-91EF-562A1F5A7A96}"
+	ProjectSection(SolutionItems) = preProject
+		src\compose.yaml = src\compose.yaml
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QTip.Api", "src\QTip.Api\QTip.Api.csproj", "{FACDD5D1-9285-4416-BD25-BD6010864C7C}"
 EndProject

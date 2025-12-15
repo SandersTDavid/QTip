@@ -1,8 +1,6 @@
 # IDE
 .idea/
-.vs/
-*.user
-*.suo
+*.iml
 
 # .NET
 **/bin/
@@ -12,7 +10,7 @@
 **/node_modules/
 **/dist/
 **/.vite/
-**/.next/
 
-# Logs
-**/*.log
+# OS
+.DS_Store
+Thumbs.db
