@@ -9,14 +9,15 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
-        var connectionString = configuration.GetConnectionString("DefaultConnection");
+        var connectionString =
+            configuration.GetConnectionString("QTipDb")
+            ?? configuration.GetConnectionString("DefaultConnection");
+
+        if (string.IsNullOrWhiteSpace(connectionString))
+            throw new InvalidOperationException("Missing connection string. Set ConnectionStrings:QTipDb or ConnectionStrings:DefaultConnection.");
 
         services.AddDbContext<QTipDbContext>(options =>
-            options.UseNpgsql(
-                connectionString,
-                npgsql => npgsql.MigrationsAssembly(typeof(QTipDbContext).Assembly.FullName)
-            )
-        );
+            options.UseNpgsql(connectionString));
 
         return services;
     }

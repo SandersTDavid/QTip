@@ -12,7 +12,7 @@ using QTip.Infrastructure.Persistence;
 namespace QTip.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(QTipDbContext))]
-    [Migration("20251214232010_InitialCreate")]
+    [Migration("20251217225722_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -27,18 +27,16 @@ namespace QTip.Infrastructure.Data.Migrations
 
             modelBuilder.Entity("QTip.Domain.Entities.ClassifiedItem", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+                        .HasColumnType("integer");
 
-                    b.Property<DateTime>("CreatedAtUtc")
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTimeOffset>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("NormalizedValue")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("RawValue")
+                    b.Property<string>("SensitiveValue")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -50,24 +48,30 @@ namespace QTip.Infrastructure.Data.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<string>("ValueHash")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.HasKey("Id");
 
                     b.HasIndex("Token")
                         .IsUnique();
 
-                    b.HasIndex("Tag", "NormalizedValue")
+                    b.HasIndex("Tag", "ValueHash")
                         .IsUnique();
 
-                    b.ToTable("classified_items", (string)null);
+                    b.ToTable("ClassifiedItems", (string)null);
                 });
 
             modelBuilder.Entity("QTip.Domain.Entities.Submission", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+                        .HasColumnType("integer");
 
-                    b.Property<DateTime>("CreatedAtUtc")
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTimeOffset>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("TokenizedText")
@@ -76,20 +80,19 @@ namespace QTip.Infrastructure.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("submissions", (string)null);
+                    b.ToTable("Submissions", (string)null);
                 });
 
             modelBuilder.Entity("QTip.Domain.Entities.SubmissionClassification", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+                        .HasColumnType("integer");
 
-                    b.Property<Guid>("ClassifiedItemId")
-                        .HasColumnType("uuid");
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("CreatedAtUtc")
-                        .HasColumnType("timestamp with time zone");
+                    b.Property<int>("ClassifiedItemId")
+                        .HasColumnType("integer");
 
                     b.Property<int>("Length")
                         .HasColumnType("integer");
@@ -97,8 +100,8 @@ namespace QTip.Infrastructure.Data.Migrations
                     b.Property<int>("StartIndex")
                         .HasColumnType("integer");
 
-                    b.Property<Guid>("SubmissionId")
-                        .HasColumnType("uuid");
+                    b.Property<int>("SubmissionId")
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 
@@ -106,13 +109,13 @@ namespace QTip.Infrastructure.Data.Migrations
 
                     b.HasIndex("SubmissionId");
 
-                    b.ToTable("submission_classifications", (string)null);
+                    b.ToTable("SubmissionClassifications", (string)null);
                 });
 
             modelBuilder.Entity("QTip.Domain.Entities.SubmissionClassification", b =>
                 {
                     b.HasOne("QTip.Domain.Entities.ClassifiedItem", "ClassifiedItem")
-                        .WithMany("Occurrences")
+                        .WithMany("SubmissionOccurrences")
                         .HasForeignKey("ClassifiedItemId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
@@ -130,7 +133,7 @@ namespace QTip.Infrastructure.Data.Migrations
 
             modelBuilder.Entity("QTip.Domain.Entities.ClassifiedItem", b =>
                 {
-                    b.Navigation("Occurrences");
+                    b.Navigation("SubmissionOccurrences");
                 });
 
             modelBuilder.Entity("QTip.Domain.Entities.Submission", b =>

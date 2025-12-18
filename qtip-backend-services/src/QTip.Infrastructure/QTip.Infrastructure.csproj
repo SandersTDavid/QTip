@@ -18,6 +18,7 @@
 
    <ItemGroup>
      <ProjectReference Include="..\QTip.Domain\QTip.Domain.csproj" />
+     <ProjectReference Include="..\QTip.Application\QTip.Application.csproj" />
    </ItemGroup>
 
    <ItemGroup>
