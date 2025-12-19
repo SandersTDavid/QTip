@@ -1,9 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using QTip.Application.Abstractions;
 using QTip.Domain.Entities;
 
 namespace QTip.Infrastructure.Persistence;
 
-public class QTipDbContext : DbContext
+public class QTipDbContext : DbContext, IQTipDbContext
 {
     public QTipDbContext(DbContextOptions<QTipDbContext> options) : base(options) { }
 

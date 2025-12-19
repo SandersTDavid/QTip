@@ -5,7 +5,7 @@ export type StatsResponse = {
     totalPiiEmailCount: number;
 };
 
-export async function getPiiEmailStats(): Promise<number> {
+export async function getPiiEmailStats(): Promise<StatsResponse> {
     const res = await fetch(`${API_BASE_URL}/api/statistics/pii-email-count`);
     if (!res.ok) throw new Error(`Stats failed: ${res.status}`);
     return res.json();

@@ -17,17 +17,6 @@ public static class ApiServiceCollectionExtensions
         {
             options.SuppressMapClientErrors = false;
         });
-        
-        // services.AddCors(options =>
-        // {
-        //     options.AddPolicy("Default", policy =>
-        //     {
-        //         policy
-        //             .AllowAnyHeader()
-        //             .AllowAnyMethod()
-        //             .AllowAnyOrigin();
-        //     });
-        // });
 
         return services;
     }

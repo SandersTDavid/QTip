@@ -15,30 +15,20 @@ public class StatisticsController : ControllerBase
         _db = db;
     }
 
-    public sealed class StatisticsResponse
+    public sealed class PiiEmailCountResponse
     {
-        public int TotalPiiEmailsSubmitted { get; set; }
+        public int TotalPiiEmailCount { get; set; }
     }
 
-    [HttpGet]
-    public async Task<ActionResult<StatisticsResponse>> Get(CancellationToken cancellationToken)
+    [HttpGet("pii-email-count")]
+    public async Task<ActionResult<PiiEmailCountResponse>> GetPiiEmailCount(CancellationToken cancellationToken)
     {
         var total = await _db.SubmissionClassifications
             .CountAsync(x => x.ClassifiedItem.Tag == "pii.email", cancellationToken);
 
-        return Ok(new StatisticsResponse
+        return Ok(new PiiEmailCountResponse
         {
-            TotalPiiEmailsSubmitted = total
+            TotalPiiEmailCount = total
         });
     }
-    
-    [HttpGet("pii-email-count")]
-    public async Task<ActionResult<int>> GetPiiEmailCount(CancellationToken cancellationToken)
-    {
-        var total = await _db.SubmissionClassifications
-            .CountAsync(x => x.ClassifiedItem.Tag == "pii.email", cancellationToken);
-
-        return Ok(total);
-    }
-
 }

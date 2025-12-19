@@ -4,15 +4,14 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{2FC82089-FEE0-49A2-91EF-562A1F5A7A96}"
-	ProjectSection(SolutionItems) = preProject
-		src\compose.yaml = src\compose.yaml
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QTip.Api", "src\QTip.Api\QTip.Api.csproj", "{FACDD5D1-9285-4416-BD25-BD6010864C7C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QTip.Domain", "src\QTip.Domain\QTip.Domain.csproj", "{3BD642AC-C148-4FD5-82AE-A6A9EB7AFA76}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QTip.Infrastructure", "src\QTip.Infrastructure\QTip.Infrastructure.csproj", "{0BDD6C88-E3F2-44FF-9E8E-D341C56F5ADF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QTip.Application", "src\QTip.Application\QTip.Application.csproj", "{B31CF922-68B5-44A5-B878-257247BA8677}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,10 +34,15 @@ Global
 		{0BDD6C88-E3F2-44FF-9E8E-D341C56F5ADF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0BDD6C88-E3F2-44FF-9E8E-D341C56F5ADF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0BDD6C88-E3F2-44FF-9E8E-D341C56F5ADF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B31CF922-68B5-44A5-B878-257247BA8677}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B31CF922-68B5-44A5-B878-257247BA8677}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B31CF922-68B5-44A5-B878-257247BA8677}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B31CF922-68B5-44A5-B878-257247BA8677}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{FACDD5D1-9285-4416-BD25-BD6010864C7C} = {2FC82089-FEE0-49A2-91EF-562A1F5A7A96}
 		{3BD642AC-C148-4FD5-82AE-A6A9EB7AFA76} = {2FC82089-FEE0-49A2-91EF-562A1F5A7A96}
 		{0BDD6C88-E3F2-44FF-9E8E-D341C56F5ADF} = {2FC82089-FEE0-49A2-91EF-562A1F5A7A96}
+		{B31CF922-68B5-44A5-B878-257247BA8677} = {2FC82089-FEE0-49A2-91EF-562A1F5A7A96}
 	EndGlobalSection
 EndGlobal
