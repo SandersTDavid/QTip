@@ -1,16 +1,64 @@
-# React + Vite
+# QTip – Data Classification & Tokenisation Prototype
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## How to run the application
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### 1. Clone the repository
 
-## React Compiler
+```
+git clone https://github.com/SandersTDavid/QTip.git
+cd qtip
+```
+### 2. Run full stack via Docker Compose
+```
+docker compose up
+```
+This starts:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+PostgreSQL (port 15432 → 5432)
 
-## Expanding the ESLint configuration
+API (http://localhost:5080)
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Frontend (http://localhost:5173)
+
+Open a browser at:
+
+http://localhost:5173
+
+## Architectural decisions
+
+Three-layer structure: Domain, Application, Infrastructure, plus Api.
+
+EF Core + PostgreSQL: migrations live in Infrastructure, the DbContext implements an interface in Application.
+
+Token vault split by database:
+
+**Submissions** stores tokenised text only.
+
+**ClassifiedItems** stores the original email, tag, token, hash.
+
+**SubmissionClassifications** joins the two.
+
+Token reuse per unique email: same email always maps to the same token.
+
+Minimal surface with only one pipeline, submit text, detect emails, store results, update stats.
+
+HTTP Controller + MediatR Commands/Queries: clean, testable entry points.
+
+Regex-based email detection.
+
+Visible feedback loop: stats endpoint feeds UI persistently from database.
+
+## Assumptions / trade-offs
+
+No user accounts or multi-tenant concerns.
+
+HTML content editable used for highlighting and no use of UI library.
+
+No editing of past submissions, write-only model.
+
+Statistic for Total PII emails submitted shows all submitted emails, not all matched and classified emails
+
+No text validation, we allow pasted blobs up to 50k chars through backend, but front end will not limit or display char count
+
+No token expiry or encryption layer: this is demonstration, not compliance-ready storage.

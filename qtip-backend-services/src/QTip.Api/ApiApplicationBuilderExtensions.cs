@@ -10,9 +10,12 @@ public static class ApiApplicationBuilderExtensions
             app.UseSwaggerUI();
         }
 
+        app.UseRouting();
+
+        app.UseCors("Default");
+
         app.MapHealthChecks("/health");
         app.MapControllers();
-        
         app.MapGet("/", () => Results.Ok("QTip API is running"));
 
         return app;

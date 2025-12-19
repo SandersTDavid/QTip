@@ -13,6 +13,17 @@ public static class ApiServiceCollectionExtensions
 
         services.AddHealthChecks();
 
+        services.AddCors(options =>
+        {
+            options.AddPolicy("Default", policy =>
+            {
+                policy
+                    .SetIsOriginAllowed(_ => true)
+                    .AllowAnyHeader()
+                    .AllowAnyMethod();
+            });
+        });
+
         services.Configure<ApiBehaviorOptions>(options =>
         {
             options.SuppressMapClientErrors = false;
