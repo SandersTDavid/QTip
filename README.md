@@ -27,9 +27,9 @@ http://localhost:5173
 
 ## Architectural decisions
 
-Three-layer structure: Domain, Application, Infrastructure, plus Api.
+Three-layer structure with Domain, Application and Infrastructure, plus Api project.
 
-EF Core + PostgreSQL: migrations live in Infrastructure, the DbContext implements an interface in Application.
+EF Core + PostgreSQL where migrations live in Infrastructure and DbContext implements an interface in Application.
 
 Token vault split by database:
 
@@ -39,15 +39,15 @@ Token vault split by database:
 
 **SubmissionClassifications** joins the two.
 
-Token reuse per unique email: same email always maps to the same token.
+Token reuse per unique email, same email always maps to the same token.
 
 Minimal surface with only one pipeline, submit text, detect emails, store results, update stats.
 
-HTTP Controller + MediatR Commands/Queries: clean, testable entry points.
+HTTP Controller + MediatR Commands/Queries with clean, testable entry points.
 
 Regex-based email detection.
 
-Visible feedback loop: stats endpoint feeds UI persistently from database.
+Stats endpoint feeds UI persistently from database.
 
 ## Assumptions / trade-offs
 
