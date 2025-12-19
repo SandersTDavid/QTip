@@ -7,7 +7,6 @@
 
 ```
 git clone https://github.com/SandersTDavid/QTip.git
-cd qtip
 ```
 ### 2. Run full stack via Docker Compose
 ```
