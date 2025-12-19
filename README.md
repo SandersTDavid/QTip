@@ -53,12 +53,12 @@ Visible feedback loop: stats endpoint feeds UI persistently from database.
 
 No user accounts or multi-tenant concerns.
 
-HTML content editable used for highlighting and no use of UI library.
+HTML content editable used for highlighting, no use of UI library.
 
 No editing of past submissions, write-only model.
 
-Statistic for Total PII emails submitted shows all submitted emails, not all matched and classified emails
+Statistic for Total PII emails submitted shows all submitted emails and not all matched, classified emails.
 
-No text validation, we allow pasted blobs up to 50k chars through backend, but front end will not limit or display char count
+No text validation, we limit text up to 50k chars through backend, but front end will not limit or display char count.
 
-No token expiry or encryption layer: this is demonstration, not compliance-ready storage.
+No token expiry or encryption layer.
