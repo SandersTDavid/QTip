@@ -1,6 +1,8 @@
 # IDE
 .idea/
 *.iml
+*.DotSettings.user
+*.sln.DotSettings.user
 
 # .NET
 **/bin/
